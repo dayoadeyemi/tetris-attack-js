@@ -49,8 +49,24 @@ SOFTWARE.
     <!-- Add the game files -->
     <script type="text/javascript" src="libs/mainloop.min.js"></script>
     <script type="text/javascript" src="libs/keydrown.min.js"></script>
+    <script type="text/javascript" src="libs/rl.js"></script>
     <script type="text/javascript" src="global_constants.js"></script>
     <script type="text/javascript" src="draw.js"></script>
     <script type="text/javascript" src="objects.js"></script>
     <script type="text/javascript" src="tetris-attack.js"></script>
+    <script type="text/javascript" src="agent2.js"></script>
+    <script>
+        function download(filename, text) {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        }
+    </script>
 </html>

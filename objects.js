@@ -500,7 +500,11 @@ function TaGame() {
         this.pushCounter -= count;
         if (this.pushCounter <= 0) {
             this.pushCounter = this.pushTime;
-            this.score += this.push();
+            const push = this.push()
+            this.score += push;
+            if (!push) {
+                this.score = 0
+            }
         }
     }
 
@@ -511,18 +515,20 @@ function TaGame() {
     /* Ends the current game.
      */
     this.gameOver = function() {
-        for (var x=0; x<this.width; x++) {
-            for (var y=0; y<this.height; y++) {
-                if (this.blocks[x][y].sprite)
-                    //this.blocks[x][y].sprite.animations.play('face');
-                this.tick = function() {
-                    console.log("game over bitch");
-                }
-                MainLoop.stop();
-            }
-            //this.nextLine[x][0].sprite.animations.play('face');
-        }
-        this.pushCounter = 0;
+        // for (var x=0; x<this.width; x++) {
+        //     for (var y=0; y<this.height; y++) {
+        //         if (this.blocks[x][y].sprite)
+        //             this.blocks[x][y].sprite.animations.play('face');
+        //         // this.tick = function() {
+        //         //     console.log("game over bitch");
+        //         // }
+        //         // game.newGame(width, height, GLOBAL.nrBlockSprites);
+        //         // MainLoop.stop();
+        //     }
+        //     //this.nextLine[x][0].sprite.animations.play('face');
+        // }
+        this.newGame(width, height, GLOBAL.nrBlockSprites);
+        // this.pushCounter = 0;
     }
 
     /* Create a grid of block objects.
@@ -769,7 +775,7 @@ function TaGame() {
         var cnc = this.updateCnc();
         if (this.chain) {
             if (this.chainOver()) {
-                console.log("chain over");
+                // console.log("chain over");
                 this.chain = 0;
             }
         }
@@ -792,17 +798,17 @@ function TaGame() {
 
         /* Calculate the current score */
         if (cnc[0] > 0) {
-            console.log("combo is ", cnc);
+            // console.log("combo is ", cnc);
             this.score += (cnc[0] * 10)
             this.score += this.comboToScore(cnc[0]);
             if (cnc[1]) {
                 this.chain++;
-                console.log("chain is ", this.chain + 1);
+                // console.log("chain is ", this.chain + 1);
             }
             if (this.chain) {
                 this.score += this.chainToScore(this.chain + 1);
             }
-            console.log("Score: ", this.score);
+            // console.log("Score: ", this.score);
         }
         // spawn garbage
 
